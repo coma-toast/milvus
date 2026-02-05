@@ -17,6 +17,8 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    networks:
+      - dokploy-network
 
   minio:
     container_name: milvus-minio
@@ -35,6 +37,8 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    networks:
+      - dokploy-network
 
   standalone:
     container_name: milvus-standalone
@@ -61,7 +65,9 @@ services:
     depends_on:
       - "etcd"
       - "minio"
+    networks:
+      - dokploy-network
 
 networks:
-  default:
-    name: milvus
+  dokploy-network:
+    external: true
